@@ -1,0 +1,7 @@
+echo "config get cluster" | nc -q 1 $1 11211 | sed '3q;d' | awk -F'[ |]' '{for(i=1;i<NF;i+=3) {print $i":"$(i+2)}}' | tee temp
+s=""
+while read -r line;
+do
+s+='"'"$line"'",'
+done < temp
+echo '{"pools": { "A": {"servers": ['"$s"']}},"route": "PoolRoute|A"}' > /etc/mcrouter/config.json
