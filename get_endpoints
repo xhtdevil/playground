@@ -5,3 +5,5 @@ do
 s+='"'"$line"'",'
 done < temp
 echo '{"pools": { "A": {"servers": ['"$s"']}},"route": "PoolRoute|A"}' > /etc/mcrouter/config.json
+cat /etc/mcrouter/config.json
+echo "test" > /tmp/test
